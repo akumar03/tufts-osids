@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<managerImpl name="Bootcamp" osid="org.osid.repository.RepositoryManager" 
+             version="2.0">
+  <!--Provide the package name where the Manager is impemented.-->
+
+  <packagename>edu.tufts.osidimpl.repository.yahoo</packagename>
+  <configuration>
+		<property key="YahooSearchDebug" value="true"/>
+ 		<property key="OSIDTester" value="verbose"/>
+ </configuration>
+
+  <!-- search for anything that matches  -->
+   <assetsbysearch repositoryid="7qpe3pvV34EaHI1U1ZcYh1ShLr_t1QVsfMJSs93swyFFAfD0Ka_nx6fJa2ii">
+	<search>
+		<type>search/keyword@mit.edu</type>
+		<criteria>tufts</criteria>
+	</search>
+	<assets any="true"/>
+   </assetsbysearch>	
+ </managerImpl>
