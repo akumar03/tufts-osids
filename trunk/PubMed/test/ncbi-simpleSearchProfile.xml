@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<managerImpl name="NCBI" osid="org.osid.repository.RepositoryManager" 
+             version="2.0">
+  <!--Provide the package name where the Manager is impemented.-->
+
+  <packagename>org.ncbi.osidimpl.repository.basic</packagename>
+  <configuration>
+		<property key="NCBILogPerformance" value="true"/>
+		<property key="NCBIDebug" value="true"/>
+ 		<property key="OSIDTester" value="verbose"/>
+ </configuration>
+
+  <!-- find a specific asset 
+  <assetbyidviamanager repositoryid="000-MyRepositoryID-123456789" assetid="01234">
+		<asset>
+			<displayname>some title</displayname>
+			<description>some description</description>
+			<id>01234</id>
+		</asset>
+  </assetbyidviamanager>
+  -->
+  <!-- search for anything that matches  -->
+   <assetsbysearch repositoryid="ncbi:20080317141300">
+	<search>
+		<type>search/keyword@mit.edu</type>
+		<criteria>frog</criteria>
+	</search>
+	<assets any="false">
+		<asset>
+			 <id>2266691</id>
+		</asset>
+		<asset>
+			 <id>1691160</id>
+		</asset>
+                <asset>
+			 <id>1502511</id>
+		</asset>
+		<asset>
+			 <id>540109</id>
+		</asset>
+                <asset>
+			 <id>1599868</id>
+		</asset>
+                
+	 </assets>
+   </assetsbysearch>
+	
+ </managerImpl>

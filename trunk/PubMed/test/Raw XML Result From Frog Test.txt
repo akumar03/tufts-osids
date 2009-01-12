@@ -1,0 +1,76 @@
+<document>
+    <position>0</position>
+    <score>1.0</score>
+    <header>
+        <resourceIdentifier>http://www.pca.state.mn.us/hot/frogs.html</resourceIdentifier>
+        <lastIndexed>2007-12-02T08:22:53Z</lastIndexed>
+        <metadataLastModified>2007-01-15T12:41:20Z</metadataLastModified>
+        <contentLastModified>2007-06-06T15:10:51Z</contentLastModified>
+        <contentLastFetched>2007-12-02T06:27:11Z</contentLastFetched>
+    </header>
+    <fields>
+        <dct:dateSubmitted xsi:type="dct:W3CDTF">2002-07-26</dct:dateSubmitted>
+        <dc:description>This Web site includes background information on the problem and exploration of deformed frogs in Minnesota, where deformed frogs were first discovered by a group of school children in 1995. The site includes several Adobe Acrobat (.pdf) downloadable reports and fact sheets on deformed frogs and the investigation of them, along with a live frog cam where visitors can observe an aquarium of deformed frogs.</dc:description>
+        <dct:isPartOf xsi:type="dct:URI">http://scout.cs.wisc.edu/nsdl-reports/life-sci/2002/ls-020726-research.html#8</dct:isPartOf>
+        <dc:title>Deformed Frogs in Minnesota</dc:title>
+        <dc:subject>Frogs</dc:subject>
+        <dc:subject>Amphibians -- Abnormalities</dc:subject>
+        <dc:subject>Frogs -- Abnormalities</dc:subject>
+        <dc:subject>Frogs -- Abnormalities -- United States.</dc:subject>
+        <dc:subject>Frogs -- Monitoring -- United States.</dc:subject>
+        <dc:subject>Frogs -- Research.</dc:subject>
+        <dc:publisher>Minnesota Pollution Control Agency.</dc:publisher>
+        <dc:date>[--]</dc:date>
+        <dc:language xsi:type="dct:RFC3066">en</dc:language>
+        <compoundAgent>Minnesota Pollution Control Agency.</compoundAgent>
+        <compoundDescription>This Web site includes background information on the problem and exploration of deformed frogs in Minnesota, where deformed frogs were first discovered by a group of school children in 1995. The site includes several Adobe Acrobat (.pdf) downloadable reports and fact sheets on deformed frogs and the investigation of them, along with a live frog cam where visitors can observe an aquarium of deformed frogs.</compoundDescription>
+        <compoundSubject>Frogs ~^ Amphibians -- Abnormalities ~^ Frogs -- Abnormalities ~^ Frogs -- Abnormalities -- United States. ~^ Frogs -- Monitoring -- United States. ~^ Frogs -- Research.</compoundSubject>
+        <compoundTitle>Deformed Frogs in Minnesota</compoundTitle>
+        <bestPassage>&lt;B&gt;Deformed&lt;/B&gt; &lt;B&gt;Frogs&lt;/B&gt; in Minnesota - Minnesota Pollution Control Agency         Skip navigation    Home...  &gt; &lt;B&gt;Deformed&lt;/B&gt; &lt;B&gt;Frogs&lt;/B&gt; in Minnesota &lt;B&gt;Deformed&lt;/B&gt; &lt;B&gt;Frogs&lt;/B&gt; in Minnesota &lt;B&gt;Deformed&lt;/B&gt; &lt;B&gt;frogs&lt;/B&gt; have been found in Minnesota... , funding for the MPCA to work with &lt;B&gt;deformed&lt;/B&gt; &lt;B&gt;frogs&lt;/B&gt; was discontinued. Some federal agencies</bestPassage>
+        <collContext>
+            <oai-id>oai:nsdl.org:crs:4721</oai-id>
+            <brand>
+                <image height="35" width="100">http://crs.nsdl.org/brands/internetscout.jpg</image>
+                <altText>Internet Scout Project</altText>
+            </brand>
+        </collContext>
+        <metadataSource url="http://www.pca.state.mn.us/hot/frogs.html">oai:nsdl.org:2200-test.20061004105932636T</metadataSource>
+    </fields>
+</document>
+<document>
+    <position>1</position>
+    <score>0.990609</score>
+    <header>
+        <resourceIdentifier>http://www.exploratorium.edu/frogs</resourceIdentifier>
+        <lastIndexed>2007-12-02T08:24:15Z</lastIndexed>
+        <metadataLastModified>2007-01-14T07:27:02Z</metadataLastModified>
+        <contentLastModified>2004-09-07T21:37:06Z</contentLastModified>
+        <contentLastFetched>2007-12-02T06:47:50Z</contentLastFetched>
+    </header>
+    <fields>
+        <dc:description>Frogs @ The Exploratorium: An online exhibition exploring the amazing, adaptable frog.</dc:description>
+        <dc:title>Exploratorium: Frogs</dc:title>
+        <dc:subject>Adaptable frog</dc:subject>
+        <dc:subject>Amphibians</dc:subject>
+        <dc:subject>Deformed frogs</dc:subject>
+        <dc:subject>Endangered</dc:subject>
+        <dc:subject>Exploratorium</dc:subject>
+        <dc:subject>Frogs</dc:subject>
+        <dc:subject>Frogs and toads</dc:subject>
+        <dc:subject>Frogs exhibition</dc:subject>
+        <dc:subject>Frogs frogs</dc:subject>
+        <dc:subject>Rain forest</dc:subject>
+        <compoundDescription>Frogs @ The Exploratorium: An online exhibition exploring the amazing, adaptable frog.</compoundDescription>
+        <compoundSubject>Adaptable frog ~^ Amphibians ~^ Deformed frogs ~^ Endangered ~^ Exploratorium ~^ Frogs ~^ Frogs and toads ~^ Frogs exhibition ~^ Frogs frogs ~^ Rain forest</compoundSubject>
+        <compoundTitle>Exploratorium: Frogs</compoundTitle>
+        <bestPassage>Exploratorium: &lt;B&gt;Frogs&lt;/B&gt;   The &lt;B&gt;Frogs&lt;/B&gt; exhibition ran at the Exploratorium from February 13, 1999 through...  exhibitions and events at the museum, subscribe to eNews . Here online, you can still enjoy our &lt;B&gt;frog&lt;/B&gt; articles, interactive exhibits and hands-on activities. About the &lt;B&gt;frog&lt;/B&gt; photographs and images on this page</bestPassage>
+        <collContext>
+            <oai-id>oai:nsdl.org:crs:496444</oai-id>
+            <brand>
+                <image height="30" width="100">http://crs.nsdl.org/brands/496444.jpg</image>
+                <altText>New Scientist Web Links: Current picks</altText>
+            </brand>
+        </collContext>
+        <metadataSource url="http://www.exploratorium.edu/frogs">oai:nsdl.org:2200-20061005112122039T</metadataSource>
+    </fields>
+</document>
