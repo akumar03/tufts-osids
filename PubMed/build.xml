@@ -1,0 +1,155 @@
+<!-- A "project" describes a set of targets that may be requested
+     when Ant is executed.  The "default" attribute defines the
+     target which is executed if no specific target is requested,
+     and the "basedir" attribute defines the current working directory
+     from which Ant executes the requested task.  This is normally
+     set to the current working directory.
+-->
+
+<project name="ncbi" default="usage" basedir=".">
+
+<!-- $Revision: 1.1 $ / $Date: 2008/01/03 17:53:54 $ -->
+
+<!-- ===================== Property Definitions =========================== -->
+  <property name="build.home"      value="${basedir}/build"/>
+  <property name="build.class"     value="${build.home}/classes" />
+  <property name="build.lib"       value="${build.home}/lib" />
+  <property name="dist.home"       value="${basedir}/dist"/>
+  <property name="src.home"        value="${basedir}/src"/>
+  <property name="dist.doc"        value="${dist.home}/docs"/>
+  <property name="dist.lib"        value="${dist.home}/lib"/>
+  <property name="lib.home"        value="${basedir}/lib"/>
+  <property name="ncbi.home"        value="${basedir}/../../../ncbi/" />
+  <property name="axis.home"        value="${basedir}/../../../axis/" />
+<!--  ==================== Compilation Control Options ==================== -->
+<!--
+  These properties control option settings on the Javac compiler when it
+  is invoked using the <javac> task.
+
+  compile.debug        Should compilation include the debug option?
+  compile.deprecation  Should compilation include the deprecation option?
+  compile.optimize     Should compilation include the optimize option?
+-->
+  <property name="compile.debug"       value="true"/>
+  <property name="compile.deprecation" value="true"/>
+  <property name="compile.optimize"    value="false" /> 
+
+<!-- ==================== Compilation Classpath =========================== -->
+<!--
+  Rather than relying on the CLASSPATH environment variable, Ant includes
+  features that makes it easy to dynamically construct the classpath you
+  need for each compilation.
+-->
+  <path id="compile.classpath">
+    <pathelement location="${basedir}" />	
+    <pathelement location="${lib.home}" />	
+    <pathelement location="${build.class}"/>
+    
+    <pathelement location="${lib.home}/okiOSID-2.0a.jar" />	
+    <pathelement location="${lib.home}/OSIDIdNoPersist-1.0.jar" />	
+    <pathelement location="${lib.home}/OSIDLoggingPlain-1.0.jar" />	
+    
+    <pathelement location="${ncbi.home}" />
+     
+    <pathelement location="${axis.home}/lib/axis.jar" />
+    <pathelement location="${axis.home}/lib/jaxrpc.jar" />
+    
+    <pathelement location="${java.class.path}" />
+    <pathelement location="${ncbi.home}/ncbi.jar" />
+  </path>
+
+<!-- ==================== All Target ====================================== -->
+<!--
+  The "all" target is a shortcut for running the "clean" target followed by the 
+  "compile" target, to force a complete recompile.
+-->
+	<target name="usage" description="default target: show available targets">
+		<echo message="These targets are supported:" />
+		<echo message="  clean    deletes compiled or jar-ed files" />
+		<echo message="  compile  compiles sources" />
+		<echo message="  all      perform clean, compile, javadoc, and jar" />
+	</target>
+
+<!-- ==================== All Target ====================================== -->
+<!--
+  The "all" target is a shortcut for running the "clean" target and the "codegen" 
+  target followed by the "compile" target, to force a complete recompile.
+-->
+  <target name="all" depends="clean, compile, javadoc, jar"
+    description="Clean build and then compile, doc, and jar"/>
+
+
+<!-- ==================== Clean Target ==================================== -->
+<!--
+  The "clean" target deletes any previous "build" and "dist" directory,
+  so that you can be ensured the application can be built from scratch.
+-->
+
+  <target name="clean" depends="">
+    <delete dir="${build.home}" />
+    <delete dir="${dist.home}" />
+  </target>
+
+<!-- ==================== Compile Target(s) ================================== -->
+<!--
+  The "compile" target transforms source files (from your "src" directory)
+  into object files in the appropriate location in the build directory.
+-->
+
+  <target name="compile" depends=""
+    description="Compile Java sources">
+        <echo>ncbi home: ${ncbi.home} </echo>
+    <mkdir dir="${build.class}"/>
+
+    <javac srcdir="${src.home}" destdir="${build.class}"
+        debug="${compile.debug}"
+        deprecation="${compile.deprecation}"
+        optimize="${compile.optimize}"
+    >
+      <classpath refid="compile.classpath"/>
+      <include name="org/**/*.java"/>
+    </javac>
+  </target>
+
+<!-- ==================== Javadoc Target ================================== -->
+<!--
+  The "javadoc" target creates Javadoc documentation for the Java
+  classes included in your application.  Normally, this is only required
+  when preparing a distribution release, but is available as a separate
+  target in case the developer wants to create Javadocs independently.
+  
+  Adding -breakiterator is recommended for use in Javadoc 1.2 to avoid warnings
+  i.e. <javadoc additionalparam="-breakiterator".... 
+-->
+
+  <target name="javadoc" depends="compile">
+
+    <mkdir dir="${dist.home}/docs/javadoc"/>
+
+    <javadoc additionalparam="-breakiterator" 
+      destdir="${dist.home}/docs/javadoc" 
+      overview="${basedir}/overview.html" 
+      verbose="no"
+      packagenames="org.*" 
+      sourcepath="."
+      doctitle="Open Service Interface Definition"
+      windowtitle="Open Service Interface Definition"
+      stylesheetfile="${basedir}/stylesheet.css"
+     >
+      <sourcepath location="${basedir}/src"/>
+      <classpath refid="compile.classpath"/>
+    </javadoc>
+  </target>
+
+<!-- ==================== jar Task ================================ -->
+    <target name="jar" depends="compile" description="jar all implementations" >
+    <mkdir dir="${dist.lib}"/>
+    <delete file="${dist.lib}/ncbiRepositoryOSID-1.0.jar"/>
+    
+    <jar jarfile="${dist.lib}/ncbiRepositoryOSID-1.0.jar"
+         basedir="${build.class}" 
+         includes="org/ncbi/osidimpl/repository/basic/*.*"/>
+
+    </target>
+
+</project>
