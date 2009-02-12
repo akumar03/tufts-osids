@@ -1,0 +1,20 @@
+<configuration>
+<field>
+		<key>DisplayName</key>
+		<title>Display Name</title>
+		<description>Name to display in datasources list.</description>
+		<default>Yahoo Internet Search</default>
+		<mandatory>false</mandatory>
+		<maxChars></maxChars>
+		<ui>0</ui>
+	</field>
+	<field>
+		<key>DomainName</key>
+		<title>Search Domain</title>
+		<description>Restrict searches to this domain.</description>
+		<default></default>
+		<mandatory>false</mandatory>
+		<maxChars></maxChars>
+		<ui>0</ui>
+	</field>
+</configuration>
