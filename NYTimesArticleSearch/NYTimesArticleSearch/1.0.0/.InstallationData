@@ -1,0 +1,22 @@
+#This file contains the data associated with this installation.
+DO NOT DELETE
+
+
+#Wed Oct 04 11:57:15 EDT 2006
+osidVersion=2.0
+javaClasspath.1=.
+copyright=Copyright 2006 Massachusetts Institute of Technology
+loadKey=edu.tufts.osidimpl.repository.yahoo@7qpe3pvV34EaHI1U1ZcYh1ShLr_t1QVsfMJSs93swyFFAfD0Ka_nx6fJa2ii
+version=1.0.0
+license=THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+creator=Mike Korcynski
+icon16x16=YahooIcon.gif
+licenseAck=false
+publisher=Massachusetts Institute of Technology
+description=Yahoo Search Resource
+osid=org.osid.repository
+format=zip
+providerId=9592
+releaseDate=2006.05.19 12\:00\:00-0400
+osidBinding=Java 1.4
+name=Yahoo

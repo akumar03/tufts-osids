@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<managerImpl name="Bootcamp" osid="org.osid.repository.RepositoryManager" 
+             version="2.0">
+  <!--Provide the package name where the Manager is impemented.-->
+
+  <packagename>edu.tufts.osidimpl.repository.nytimes</packagename>
+  <configuration>
+		<property key="NYTimesSearchDebug" value="true"/>
+ 		<property key="OSIDTester" value="verbose"/>
+ </configuration>
+
+  <!-- search for anything that matches  -->
+   <assetsbysearch repositoryid="a9cb98b3be576fcdc75e6a28a6530607557925337">
+	<search>
+		<type>search/keyword@mit.edu</type>
+		<criteria>tufts</criteria>
+	</search>
+	<assets any="true"/>
+   </assetsbysearch>	
+ </managerImpl>
