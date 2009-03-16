@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<field>
+		<key>DisplayName</key>
+		<title>Display Name</title>
+		<description>Title to display in resource list</description>
+		<default>flickr</default>
+		<mandatory>true</mandatory>
+		<maxChars>30</maxChars>
+		<ui>0</ui>
+	</field>
+	<field>
+		<key>FlickrCreativeCommons</key>
+		<title>CC images only</title>
+		<description>Set true to restrict results to images licensed under creative commons</description>
+		<default>true</default>
+		<mandatory>true</mandatory>
+		<values>
+			<value>true</value>
+			<value>false</value>
+		</values>
+		<maxChars/>
+		<ui>10</ui>
+	</field>
+	<field>
+		<key>FlickrSortOrder</key>
+		<title>Sort Order</title>
+		<description>Order in which to sort results</description>
+		<default>relevance</default>
+		<mandatory>true</mandatory>
+		<values>
+			<value>relevance</value>
+			<value>interestingness-desc</value>
+			<value>date-posted-desc</value>
+			<value>date-taken-desc</value>
+		</values>
+		<maxChars/>
+		<ui>10</ui>
+	</field>
+</configuration>
