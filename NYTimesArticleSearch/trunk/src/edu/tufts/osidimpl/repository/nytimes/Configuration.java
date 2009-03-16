@@ -5,6 +5,8 @@ import org.json.*;
 import org.apache.commons.httpclient.*;
 import org.apache.commons.httpclient.methods.*;
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 public class Configuration
 {
 	private static Configuration _configuration = new Configuration();
@@ -32,9 +34,9 @@ public class Configuration
 	private org.osid.shared.Id _repositoryId = null;
 	private static final String _repositoryDisplayName = "NY Times Article Search";
 	private static final String _repositoryDescription = "With the Article Search API, you can search New York Times articles from 1981 to today, retrieving headlines, abstracts, lead paragraphs and links to associated multimedia.";
-	private static final String _queryPrefix = "http://api.nytimes.com/svc/search/v1/article?&fields=title,body,url,date,multimedia,byline,classifiers_facet,multimedia,date,small_image_url&api-key=a9cb98b3be576fcdc75e6a28a6530607:5:57925337&query=";
+	private static final String _queryPrefix = "http://api.nytimes.com/svc/search/v1/article?&fields=title,body,url,date,multimedia,byline,classifiers_facet,multimedia,date,small_image_url&begin_date=19810101&end_date="+getCurrentDate()+"&offset=REPLACEME2&rank=REPLACEME1&api-key=a9cb98b3be576fcdc75e6a28a6530607:5:57925337&query=";
 	private java.util.Vector _repositoryVector = null;
-
+	private static String _rank = "newest";
 	// Types for 1 Repository
 	private static final org.osid.shared.Type _bootcampRepositoryType = new Type("tufts.edu","repository","nytimes");
 	private static final org.osid.shared.Type _bootcampAssetType = new Type("tufts.edu","asset","nytimes");
@@ -259,6 +261,7 @@ public class Configuration
 		return _repositoryId;
 	}
 
+	
 	public String getRepositoryDisplayName()
 	{
 		return (_DisplayName != null ? _DisplayName : _repositoryDisplayName);
@@ -268,7 +271,17 @@ public class Configuration
 	{
 		return _repositoryDescription;
 	}
+	
+	public String getRank()
+	{
+		return _rank;
+	}
 
+	public void setRank(String rank)
+	{
+		_rank = rank;
+	}
+	
 	public org.osid.shared.Type getRepositoryType()
 	{
 		return _bootcampRepositoryType;
@@ -365,6 +378,13 @@ public class Configuration
 			String s = (String)o;
 			_DisplayName = s;
 		}
+		
+		o = properties.getProperty("Rank");
+		if (o != null) {
+			String s = (String)o;
+			_rank = s;
+			_queryPrefix.replaceAll("REPLACEME1", _rank);
+		}
 	}
 
 	public org.osid.repository.Asset singleAssetSearch(org.osid.shared.Id assetId)
@@ -398,58 +418,86 @@ public class Configuration
 			throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.UNKNOWN_TYPE);
 		}
 
+		java.util.Vector aggregateVector = new java.util.Vector();
 		java.util.Vector assetVector = new java.util.Vector();
 
 		try {
 			String criteria = (String)searchCriteria;
 			//criteria = criteria.trim().toLowerCase();
 			criteria = java.net.URLEncoder.encode(criteria,"UTF-8");			
-			String query = _queryPrefix + criteria;
-			if (_DomainName != null && _DomainName.length() > 0)
-			{
-				_DomainName = java.net.URLEncoder.encode(_DomainName,"UTF-8");
-				query = query + "&site=" + _DomainName;
-			}
-			if (_configuration.debug()) System.out.println("Query: " + query);
+			
 			
 			HttpClient client = new HttpClient();
-	        GetMethod method = new GetMethod(query);
-
-	        // Send GET request
-	        int statusCode = client.executeMethod(method);
-
-	        if (statusCode != HttpStatus.SC_OK) {
-	        	System.err.println("Method failed: " + method.getStatusLine());
+			int offset = 0;
+	        for (int i = 0; i< 5; i++)
+	        {
+	        	
+	        	String query = _queryPrefix + criteria;
+	        	query = query.replaceAll("REPLACEME2", new Integer(i).toString());
+	        	query = query.replaceAll("REPLACEME1", _rank);
+				if (_DomainName != null && _DomainName.length() > 0)
+				{
+					_DomainName = java.net.URLEncoder.encode(_DomainName,"UTF-8");
+					query = query + "&site=" + _DomainName;
+				}
+				
+				if (_configuration.debug()) 
+					System.out.println("Query: " + query);
+				
+				GetMethod method = new GetMethod(query);
+	
+		        // Send GET request
+		        int statusCode = client.executeMethod(method);
+	
+		        if (statusCode != HttpStatus.SC_OK) {
+		        	System.err.println("Method failed: " + method.getStatusLine());
+		        }
+		        InputStream rstream = null;
+	
+		        // Get the response body
+		        rstream = method.getResponseBodyAsStream();
+	
+		        // Process the response from Yahoo! Web Services
+		        BufferedReader br = new BufferedReader(new InputStreamReader(rstream));
+		        String jsonString = "";
+		        String line;
+		        while ((line = br.readLine()) != null) {
+		            jsonString += line;
+		        }
+		        br.close();
+	
+		       // System.out.println(jsonString);
+		        // Construct a JSONObject from a source JSON text string.
+		        // A JSONObject is an unordered collection of name/value pairs. Its external
+		        // form is a string wrapped in curly braces with colons between the names
+		        // and values, and commas between the values and names.
+		        JSONObject jo = new JSONObject(jsonString);
+		        
+		        Metadata metadata = new Metadata(jo);
+				assetVector = metadata.getAssets();
+				aggregateVector.addAll(assetVector);
 	        }
-	        InputStream rstream = null;
-
-	        // Get the response body
-	        rstream = method.getResponseBodyAsStream();
-
-	        // Process the response from Yahoo! Web Services
-	        BufferedReader br = new BufferedReader(new InputStreamReader(rstream));
-	        String jsonString = "";
-	        String line;
-	        while ((line = br.readLine()) != null) {
-	            jsonString += line;
-	        }
-	        br.close();
-
-	        // Construct a JSONObject from a source JSON text string.
-	        // A JSONObject is an unordered collection of name/value pairs. Its external
-	        // form is a string wrapped in curly braces with colons between the names
-	        // and values, and commas between the values and names.
-	        JSONObject jo = new JSONObject(jsonString);
 	        
-			Metadata metadata = new Metadata(jo);
-			assetVector = metadata.getAssets();
 			if (_logPerformance) Utilities.log("Milliseconds to constructed assets " + (java.util.Calendar.getInstance().getTimeInMillis() - startTime));
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		return new AssetIterator(assetVector);
+		return new AssetIterator(aggregateVector);
 	}
+	 
+	
+		  public static String getCurrentDate()
+		  {
+		    String DATE_FORMAT = "yyyyMMdd";
+		    SimpleDateFormat sdf =
+		          new SimpleDateFormat(DATE_FORMAT);
+		    Calendar c1 = Calendar.getInstance(); // today
+
+		    return sdf.format(c1.getTime());
+		  
+	}
+	
 	/**
 		The MIT License
 

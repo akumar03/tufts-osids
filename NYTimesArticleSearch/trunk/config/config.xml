@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<field>
+		<key>DisplayName</key>
+		<title>Display Name</title>
+		<description>Title to display in resource list</description>
+		<default>NY Times Article Search</default>
+		<mandatory>true</mandatory>
+		<maxChars>30</maxChars>
+		<ui>0</ui>
+	</field>
+	<field>
+		<key>Rank</key>
+		<title>Sort Order</title>
+		<description>Order in which to sort results</description>
+		<default>newest</default>
+		<mandatory>true</mandatory>
+		<values>
+			<value>closest</value>
+			<value>newest</value>
+			<value>oldest</value>
+		</values>
+		<maxChars/>
+		<ui>10</ui>
+	</field>
+</configuration>
