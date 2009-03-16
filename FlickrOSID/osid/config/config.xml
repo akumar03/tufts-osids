@@ -37,4 +37,17 @@
 		<maxChars/>
 		<ui>10</ui>
 	</field>
+	<field>
+		<key>SkipMetadata</key>
+		<title>Skip metadata for images</title>
+		<description>Don't load metadata for images,  allow for faster searching</description>
+		<default>false</default>
+		<mandatory>true</mandatory>
+		<values>
+			<value>true</value>
+			<value>false</value>
+		</values>
+		<maxChars/>
+		<ui>10</ui>
+	</field>
 </configuration>
