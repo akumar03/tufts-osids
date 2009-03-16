@@ -11,9 +11,10 @@ public class Configuration
 	// Used in loading managers
 	private org.osid.OsidContext _osidContext = new org.osid.OsidContext();
 	private java.util.Properties _properties = new java.util.Properties();
-	private org.osid.repository.RepositoryManager _repositoryManager = null;
-	private String _myConfigurationProperty1 = null;
-
+	private String _sortParameter = null;
+	private String _skipMetadata ="false";
+	private boolean _creativeCommons = false;
+	
 	// Logging Manager
 	private static final String LOG_FILENAME = "Flickr";
 	private static final String LOGGING_IMPLEMENTATION = "comet.osidimpl.logging.plain";
@@ -27,14 +28,15 @@ public class Configuration
 	private org.osid.shared.Id _repositoryId = null;
 	private static final String _repositoryDisplayName = "flickr";
 	private static final String _repositoryDescription = "This flickr resource allows you to search flickr for photos.";
-	private static final String _queryPrefix = "http://api.flickr.com/services/rest/?method=flickr.photos.search&sort=interestingness-desc&api_key=093a05d30b0be54c8b18d227fec80b6b&per_page=10&format=json&text=";
-	private java.util.Vector _repositoryVector = null;
+	private static String _queryPrefix = "http://api.flickr.com/services/rest/?method=flickr.photos.search&sort="+"REPLACEME1"+"&api_key=093a05d30b0be54c8b18d227fec80b6b&per_page=10&format=json&text=";
+
 
 	// Types for 1 Repository
 	private static final org.osid.shared.Type _bootcampRepositoryType = new Type("tufts.edu","repository","flickr");
 	private static final org.osid.shared.Type _bootcampAssetType = new Type("tufts.edu","asset","flickr");
 	private static final org.osid.shared.Type _keywordSearchType = new Type("mit.edu","search","keyword");
 	private static final org.osid.shared.Type _titleSearchType = new Type("mit.edu","search","title");
+	private java.util.Vector _repositoryVector = null;
 	private java.util.Vector _repositoryTypeVector = null;
 	private java.util.Vector _assetTypeVector = null;
 	private java.util.Vector _searchTypeVector = null;
@@ -330,18 +332,39 @@ public class Configuration
 	{
 		return _debug;
 	}
+	
+	public String skipMetadata()
+	{
+		return _skipMetadata;
+	}
 
 	public void setConfiguration(java.util.Properties properties)
 	{
 		Object o = properties.getProperty("FlickrConfigurationProperty");
-		if (o != null) {
-			_myConfigurationProperty1 = (String)o;
-		}
+		//if (o != null) {
+		//	_myConfigurationProperty1 = (String)o;
+	//	}
 		o = properties.getProperty("FlickrDebug");
 		if (o != null) {
 			String s = (String)o;
 			_debug = (s.trim().toLowerCase().equals("true"));
 		}
+		
+		o = properties.getProperty("FlickrCreativeCommons");
+		if (o != null) {
+			String s = (String)o;
+			_creativeCommons = (s.trim().toLowerCase().equals("true"));
+		}
+		else
+			_creativeCommons=false;
+		
+		o = properties.getProperty("FlickrSortOrder");
+		if (o != null) {
+			String s = (String)o;
+			_sortParameter = s;
+		}
+		else 
+			_sortParameter = "relevance";
 		
 		o = properties.getProperty("FlickrLogPerformance");
 		if (o != null) {
@@ -359,6 +382,12 @@ public class Configuration
 		if (o != null) {
 			String s = (String)o;
 			_DisplayName = s;
+		}
+		
+		o = properties.getProperty("SkipMetadata");
+		if (o != null) {
+			String s = (String)o;
+			_skipMetadata = s;
 		}
 	}
 
@@ -386,6 +415,7 @@ public class Configuration
 			throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.UNKNOWN_TYPE);
 		}
 
+		_queryPrefix = _queryPrefix.replaceAll("REPLACEME1", _sortParameter);
 		return new AssetIterator((String)searchCriteria,_DomainName,_queryPrefix);
 	}
 	/**
@@ -412,4 +442,20 @@ public class Configuration
 	 THE SOFTWARE.
 
 	 */
+
+	public void setSortParameter(String _sortParameter) {
+		this._sortParameter = _sortParameter;
+	}
+
+	public String getSortParameter() {
+		return _sortParameter;
+	}
+
+	public void setCreativeCommons(boolean _creativeCommons) {
+		this._creativeCommons = _creativeCommons;
+	}
+
+	public boolean isCreativeCommons() {
+		return _creativeCommons;
+	}
 }

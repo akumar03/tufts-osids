@@ -46,6 +46,8 @@ implements org.osid.repository.Asset
     		
     		org.osid.repository.Record record = createRecord(RecordStructure.getInstance().getId());
     		//record.createPart(idManager.getId(configuration.PartStructureIDs[configuration.LARGE_IMAGE_URL_INDEX]),"http://www.tufts.edu/home/flash/images/ftrPhotoHome.jpg");
+  if (configuration.skipMetadata().equals("false"))
+  {
     		String query = queryPrefix + id;
     		HttpClient client = new HttpClient();
             GetMethod method = new GetMethod(query);
@@ -124,15 +126,8 @@ implements org.osid.repository.Asset
     	    		record.createPart(idManager.getId(configuration.PartStructureIDs[configuration.KEYWORDS_INDEX]),s);
     	    }
     	    }
-    		//thumbnail http:// farm[farm].static.flickr.com/[server]/[primary]_[secret]_s.jpg
-    		//full image http://farm2.static.flickr.com/1150/722073942_c2bf23686e.jpg
-    	    String thumb = "http://farm" + farm + ".static.flickr.com/" + server +"/" + id + "_" + secret +"_s.jpg";
-    	    String med = "http://farm" + farm + ".static.flickr.com/" + server +"/" + id + "_" + secret +".jpg";
-    	    String big = "http://farm" + farm + ".static.flickr.com/" + server +"/" + id + "_" + secret +".jpg";
-    	    record.createPart(idManager.getId(configuration.PartStructureIDs[configuration.THUMBNAIL_URL_INDEX]),thumb);
-    	    record.createPart(idManager.getId(configuration.PartStructureIDs[configuration.MEDIUM_IMAGE_URL_INDEX]),med);
-    	    record.createPart(idManager.getId(configuration.PartStructureIDs[configuration.LARGE_IMAGE_URL_INDEX]),big);
-    	  
+    	    
+    	    
     	    JSONObject urls = jo.optJSONObject("urls");
     	    if (urls != null)
     	    {
@@ -154,6 +149,17 @@ implements org.osid.repository.Asset
     	    }
     	    }
 
+  }
+    		//thumbnail http:// farm[farm].static.flickr.com/[server]/[primary]_[secret]_s.jpg
+    		//full image http://farm2.static.flickr.com/1150/722073942_c2bf23686e.jpg
+    	    String thumb = "http://farm" + farm + ".static.flickr.com/" + server +"/" + id + "_" + secret +"_s.jpg";
+    	    String med = "http://farm" + farm + ".static.flickr.com/" + server +"/" + id + "_" + secret +".jpg";
+    	    String big = "http://farm" + farm + ".static.flickr.com/" + server +"/" + id + "_" + secret +".jpg";
+    	    record.createPart(idManager.getId(configuration.PartStructureIDs[configuration.THUMBNAIL_URL_INDEX]),thumb);
+    	    record.createPart(idManager.getId(configuration.PartStructureIDs[configuration.MEDIUM_IMAGE_URL_INDEX]),med);
+    	    record.createPart(idManager.getId(configuration.PartStructureIDs[configuration.LARGE_IMAGE_URL_INDEX]),big);
+    	  
+    	  
 
 /*    		if (type != null) record.createPart(idManager.getId(configuration.PartStructureIDs[configuration.TYPE_INDEX]),type);
     		if (description != null) {
