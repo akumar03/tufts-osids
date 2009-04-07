@@ -1,0 +1,11 @@
+<configuration>
+<field>
+		<key>DisplayName</key>
+		<title>Display Name</title>
+		<description>Name to display in datasources list.</description>
+		<default>Freebase</default>
+		<mandatory>false</mandatory>
+		<maxChars></maxChars>
+		<ui>0</ui>
+	</field>	
+</configuration>
